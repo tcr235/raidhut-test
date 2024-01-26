@@ -1,1 +1,1 @@
-export const secret = process.env.TOKEN_KEY
+export const secret = process.env.SECRET_ACCESS_KEY

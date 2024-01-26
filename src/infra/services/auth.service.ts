@@ -22,21 +22,21 @@ class UserService {
 
         const userCreated = await this.userRepository.create(data);
 
-        const accountActivationToken = SecurityService.generateToken()
+        // const accountActivationToken = SecurityService.generateToken()
 
-        authMailService.accountActivation({
-            to: userCreated.email,
-            templateData: {
-                firstName: userCreated.firstName,
-                email: userCreated.email,
-                activationUrl: 'for a while nothing to be rendered'
-            }
-        })
+        // authMailService.accountActivation({
+        //     to: userCreated.email,
+        //     templateData: {
+        //         firstName: userCreated.firstName,
+        //         email: userCreated.email,
+        //         activationUrl: 'for a while nothing to be rendered'
+        //     }
+        // })
 
         return
     }
 
-    async signIn(data: ISignInData): Promise<string>{
+    async signIn(data: ISignInData): Promise<object>{
         const userData = await this.userRepository.findOne({ email: data.email })
 
         if(!userData) {
@@ -51,7 +51,7 @@ class UserService {
 
         const token = SecurityService.createToken(userData.id, userData.email);
         
-        return token;
+        return {token, firstName: userData.firstName, email: userData.email};
     }
 }
 

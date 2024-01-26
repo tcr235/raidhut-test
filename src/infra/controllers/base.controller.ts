@@ -1,7 +1,7 @@
 import { Response } from "express";
 
 interface IBaseControllerPayload {
-    message: string,
+    message: string | object,
     error?: any,
     data?: any,
 }
